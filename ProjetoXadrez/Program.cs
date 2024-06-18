@@ -4,7 +4,10 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            ChessBoard board = new ChessBoard(8, 8);
+
+            Console.WriteLine(board.ToString());
         }
     }
 }
+ 
