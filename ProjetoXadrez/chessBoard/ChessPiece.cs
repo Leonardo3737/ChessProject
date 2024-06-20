@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjetoXadrez
+namespace ProjetoXadrez.chessBoard
 {
     internal class ChessPiece
     {
@@ -14,17 +15,16 @@ namespace ProjetoXadrez
         public int movementsAmount { get; protected set; }
         public ChessBoard chessBoard { get; protected set; }
 
-
-        public ChessPiece()
+        public ChessPiece(Color color, ChessBoard chessBoard)
         {
-        }
-
-        public ChessPiece(Position position, Color color, ChessBoard chessBoard)
-        {
-            this.position = position;
             this.color = color;
             this.movementsAmount = 0;
             this.chessBoard = chessBoard;
+        }
+
+        public void incrementMovement()
+        {
+            movementsAmount++;
         }
     }
 }
