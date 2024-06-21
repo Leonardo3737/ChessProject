@@ -13,18 +13,23 @@ namespace ProjetoXadrez.chessBoard
         public Position position { get; set; }
         public Color color { get; protected set; }
         public int movementsAmount { get; protected set; }
-        public ChessBoard chessBoard { get; protected set; }
+        public ChessBoard board { get; protected set; }
 
-        public ChessPiece(Color color, ChessBoard chessBoard)
+        public ChessPiece(Color color, ChessBoard board)
         {
             this.color = color;
             this.movementsAmount = 0;
-            this.chessBoard = chessBoard;
+            this.board = board;
         }
 
         public void incrementMovement()
         {
             movementsAmount++;
+        }
+
+        public virtual bool movimentValidation(Position end)
+        {
+            return board.isHiddenPosition(end);
         }
     }
 }

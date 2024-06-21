@@ -10,15 +10,28 @@ namespace ProjetoXadrez
         {
             Game game = new Game();
             game.addPieces();
-            Screen.print(game.board);
+            
 
-            Position initial = Screen.ReadPosition();
+            while (true)
+            {
+                try
+                {
+                    Screen.print(game.board);
 
-            Position destiny = Screen.ReadPosition();
+                    Position initial = Screen.ReadPosition();
+                    Position destiny = Screen.ReadPosition();
 
-            game.ExecuteMoviment(initial, destiny);
+                    game.ExecuteMoviment(initial, destiny);
 
-            Screen.print(game.board);
+                    Screen.print(game.board);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            
+            
 
 
             /*for (int r = 0; r < 8; r++)

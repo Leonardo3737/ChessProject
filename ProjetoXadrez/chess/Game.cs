@@ -1,4 +1,4 @@
-﻿
+﻿using ProjetoXadrez.chess.exceptions;
 using ProjetoXadrez.chessBoard;
 
 namespace ProjetoXadrez.chess
@@ -16,9 +16,12 @@ namespace ProjetoXadrez.chess
             player = Color.White;
         }
 
-        public void ExecuteMoviment(Position initial, Position end)
+        public void ExecuteMoviment(Position init, Position end)
         {
-            ChessPiece piece = board.removePiece(initial);
+            ChessPiece piece = board.Piece(init);
+            if (!piece.movimentValidation(init, end)) throw new GameExceptions("Movimento Invalido");
+
+            board.removePiece(init);
             piece.incrementMovement();
             board.removePiece(end);
             board.addPiece(piece, end);
@@ -33,10 +36,10 @@ namespace ProjetoXadrez.chess
             ChessPiece knight = new Knight(Color.Red, board);
             ChessPiece bishop = new Bishop(Color.Red, board);
 
-            board.addPiece(queen, ConvertPosition('a', 2));
-            board.addPiece(pawn, ConvertPosition('a', 1));
-            board.addPiece(king, ConvertPosition('a', 4));
-            board.addPiece(bishop, ConvertPosition('a', 3));
+            board.addPiece(queen, ConvertPosition('a', 1));
+            board.addPiece(pawn, ConvertPosition('b', 1));
+            board.addPiece(king, ConvertPosition('c', 1));
+            board.addPiece(bishop, ConvertPosition('d', 1));
         }
 
         public Position ConvertPosition(char col, int row)
