@@ -4,7 +4,7 @@ namespace ProjetoXadrez.chessBoard
 {
     internal class ChessBoard
     {
-        public int rows {  get; set; }
+        public int rows { get; set; }
         public int cols { get; set; }
         private ChessPiece[,] _pieces;
 
@@ -20,11 +20,17 @@ namespace ProjetoXadrez.chessBoard
             return _pieces[position.row, position.col];
         }
 
+        public ChessPiece Piece(int row, int col)
+        {
+            return _pieces[row, col];
+        }
+
         public void addPiece(ChessPiece p, Position position)
         {
-            if(isHiddenPosition(position)) throw new ChessBoardException("Ja existe uma peça nessa posição");
+            if (isHeldPosition(position)) throw new ChessBoardException("Ja existe uma peça nessa posição");
             _pieces[position.row, position.col] = p;
             p.position = position;
+            p.generateValidsPositions();
         }
 
         public ChessPiece removePiece(Position position)
@@ -36,7 +42,7 @@ namespace ProjetoXadrez.chessBoard
             return aux;
         }
 
-        public bool isHiddenPosition(Position position)
+        public bool isHeldPosition(Position position)
         {
             validatePosition(position);
             return Piece(position) != null;
@@ -44,7 +50,13 @@ namespace ProjetoXadrez.chessBoard
 
         public void validatePosition(Position position)
         {
-            if(position.col < 0 || position.col > cols || position.row < 0 || position.row > rows) throw new ChessBoardException("Posicao Invalida");
+            if (!isValidPosition(position))
+                throw new ChessBoardException("Posicao Invalida");
+        }
+
+        public bool isValidPosition(Position position)
+        {
+            return !(position.row < 0 || position.row >= rows || position.col < 0 || position.col >= cols);
         }
     }
 }

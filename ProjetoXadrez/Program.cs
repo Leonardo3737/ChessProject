@@ -1,6 +1,5 @@
 ﻿using ProjetoXadrez.chess;
 using ProjetoXadrez.chessBoard;
-using ProjetoXadrez.chess;
 
 namespace ProjetoXadrez
 {
@@ -10,23 +9,28 @@ namespace ProjetoXadrez
         {
             Game game = new Game();
             game.addPieces();
-            
 
-            while (true)
+            while (!game.isFinished)
             {
                 try
                 {
                     Screen.print(game.board);
 
                     Position initial = Screen.ReadPosition();
+                    Console.Clear();
+                    game.VerifyMove(initial);
+                    
+
+                    Screen.print(game.board, game.board.Piece(initial).generateValidsPositions());
+
                     Position destiny = Screen.ReadPosition();
 
-                    game.ExecuteMoviment(initial, destiny);
-
-                    Screen.print(game.board);
-                }
+                    game.makeMove(initial, destiny);
+                    Console.Clear();
+                } 
                 catch (Exception e)
                 {
+                    Console.Clear();
                     Console.WriteLine(e.Message);
                 }
             }
