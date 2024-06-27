@@ -5,7 +5,31 @@ namespace ProjetoXadrez
 {
     class Screen
     {
-        public static void print(ChessBoard board)
+        public static void printGame(Game game)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Turno: {game.move}");
+            printCapturedsPiece(game);
+            Console.WriteLine();
+            Console.WriteLine();
+            printBoard(game.board);
+            Console.WriteLine();
+            if (game.check) Console.WriteLine("Xeque!!");
+        }
+
+        public static void printGame(Game game, bool[,] validsPositions)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Turno: {game.move}");
+            printCapturedsPiece(game);
+            Console.WriteLine();
+            Console.WriteLine();
+            printBoard(game.board, validsPositions);
+            Console.WriteLine();
+            if (game.check) Console.WriteLine("Xeque!!");
+        }
+
+        public static void printBoard(ChessBoard board)
         {
             ConsoleColor auxBackground = Console.BackgroundColor;
             for (int r = 0; r < board.rows; r++)
@@ -27,7 +51,7 @@ namespace ProjetoXadrez
             Console.WriteLine("  a b c d e f g h");
         }
 
-        public static void print(ChessBoard board, bool[,] validsPositions)
+        public static void printBoard(ChessBoard board, bool[,] validsPositions)
         {
             ConsoleColor auxBackground = Console.BackgroundColor;
 
@@ -54,7 +78,36 @@ namespace ProjetoXadrez
 
             Console.WriteLine("  a b c d e f g h");
         }
+        
+        public static void printCapturedsPiece(Game game)
+        {
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.WriteLine("Peças Capturadas");
+            Console.Write("Brancas: ");
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            printList(game.getCapturedPiecesByColor(Color.White));
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
+            Console.Write("Pretas: ");
+            Console.ForegroundColor = ConsoleColor.Black;
+            printList(game.getCapturedPiecesByColor(Color.Red));
+            Console.ForegroundColor = aux;
+        }
 
+        public static void printList(HashSet<ChessPiece> pieces)
+        {
+            if (pieces.Count == 0) return;
+            ConsoleColor aux = Console.BackgroundColor;
+            if (pieces.First<ChessPiece>().color == Color.Red) Console.BackgroundColor = ConsoleColor.White;
+            Console.Write("[ ");
+            foreach (ChessPiece piece in pieces)
+            {
+                Console.Write($"{piece} ");
+            }
+            Console.Write(" ]");
+            Console.BackgroundColor = aux;
+        }
+ 
         public static void printPiece(ChessPiece piece)
         {
             if (piece == null)

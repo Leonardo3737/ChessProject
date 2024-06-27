@@ -17,7 +17,9 @@ namespace ProjetoXadrez.chess
                 {
                     bool colRange = Math.Abs(position.col - col) <= 1;
                     bool rowRange = Math.Abs(position.row - row) <= 1;
+                    ChessPiece piece = board.Piece(row, col);
                     auxValidsPositions[row, col] = colRange && rowRange;
+                    if (piece != null && piece.color == color) auxValidsPositions[row, col] = false;
                 }
             }
             return auxValidsPositions;

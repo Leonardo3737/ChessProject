@@ -14,15 +14,18 @@ namespace ProjetoXadrez
             {
                 try
                 {
-                    Screen.print(game.board);
+                    Screen.printGame(game);
 
+                    Console.Write("Origem: ");
                     Position initial = Screen.ReadPosition();
+
                     Console.Clear();
+
                     game.VerifyMove(initial);
-                    
 
-                    Screen.print(game.board, game.board.Piece(initial).generateValidsPositions());
+                    Screen.printGame(game, game.board.Piece(initial).generateValidsPositions());
 
+                    Console.Write("Destino: ");
                     Position destiny = Screen.ReadPosition();
 
                     game.makeMove(initial, destiny);

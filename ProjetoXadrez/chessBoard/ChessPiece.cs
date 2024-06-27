@@ -15,11 +15,13 @@ namespace ProjetoXadrez.chessBoard
         public Color color { get; protected set; }
         public int movementsAmount { get; protected set; }
         public ChessBoard board { get; protected set; }
+        public bool isCaptured { get; set; }
         public ChessPiece(Color color, ChessBoard board)
         {
             this.color = color;
             this.movementsAmount = 0;
             this.board = board;
+            isCaptured = false;
         }
 
         protected bool canMove(Position pos)
@@ -31,6 +33,11 @@ namespace ProjetoXadrez.chessBoard
         public void incrementMovement()
         {
             movementsAmount++;
+        }
+
+        public void decrementMovement()
+        {
+            movementsAmount--;
         }
         public bool isblocked()
         {
