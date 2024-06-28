@@ -3,6 +3,6 @@
     enum Color
     {
         White,
-        Red
+        Black
     }
 }

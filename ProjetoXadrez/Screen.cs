@@ -7,6 +7,8 @@ namespace ProjetoXadrez
     {
         public static void printGame(Game game)
         {
+            if (!game.isFinished && game.check) Console.WriteLine("XEQUE!!");
+            else if (!game.isFinished) Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine($"Turno: {game.move}");
             printCapturedsPiece(game);
@@ -14,19 +16,18 @@ namespace ProjetoXadrez
             Console.WriteLine();
             printBoard(game.board);
             Console.WriteLine();
-            if (game.check) Console.WriteLine("Xeque!!");
         }
 
         public static void printGame(Game game, bool[,] validsPositions)
         {
-            Console.WriteLine();
+            if (!game.isFinished && game.check) Console.WriteLine("XEQUE!!");
+            else Console.WriteLine();
             Console.WriteLine($"Turno: {game.move}");
             printCapturedsPiece(game);
             Console.WriteLine();
             Console.WriteLine();
             printBoard(game.board, validsPositions);
             Console.WriteLine();
-            if (game.check) Console.WriteLine("Xeque!!");
         }
 
         public static void printBoard(ChessBoard board)
@@ -90,7 +91,7 @@ namespace ProjetoXadrez
             Console.WriteLine();
             Console.Write("Pretas: ");
             Console.ForegroundColor = ConsoleColor.Black;
-            printList(game.getCapturedPiecesByColor(Color.Red));
+            printList(game.getCapturedPiecesByColor(Color.Black));
             Console.ForegroundColor = aux;
         }
 
@@ -98,7 +99,7 @@ namespace ProjetoXadrez
         {
             if (pieces.Count == 0) return;
             ConsoleColor aux = Console.BackgroundColor;
-            if (pieces.First<ChessPiece>().color == Color.Red) Console.BackgroundColor = ConsoleColor.White;
+            if (pieces.First<ChessPiece>().color == Color.Black) Console.BackgroundColor = ConsoleColor.White;
             Console.Write("[ ");
             foreach (ChessPiece piece in pieces)
             {

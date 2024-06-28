@@ -30,15 +30,16 @@ namespace ProjetoXadrez
 
                     game.makeMove(initial, destiny);
                     Console.Clear();
-                } 
+                }
                 catch (Exception e)
                 {
                     Console.Clear();
                     Console.WriteLine(e.Message);
                 }
             }
-            
-            
+            Console.WriteLine("XEQUE MATE!");
+            Screen.printGame(game);
+
 
 
             /*for (int r = 0; r < 8; r++)
