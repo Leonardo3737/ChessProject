@@ -124,7 +124,7 @@ namespace ProjetoXadrez.chess
             //board.addPiece(queen, ConvertPosition('a', 1));
             addNewPiece('a', 7, kingB);
             addNewPiece('h', 1, kingW);
-            addNewPiece('b', 1, pawnW1);
+            addNewPiece('d', 4, knight);
             addNewPiece('b', 2, rookW1);
             addNewPiece('b', 8, pawn1);
             addNewPiece('c', 3, rookW2);

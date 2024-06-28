@@ -11,13 +11,50 @@ namespace ProjetoXadrez.chess
         public override bool[,] generateValidsPositions()
         {
             bool[,] auxValidsPositions = new bool[board.rows, board.cols];
-            for (int row = 0; row < board.rows; row++)
-            {
-                for (int col = 0; col < board.cols; col++)
-                {
 
-                }
+            Position pos = new Position(0, 0);
+
+            pos.setPosition(position.row- 1, position.col- 2);
+            if (board.isValidPosition(pos) && canMove(pos))
+            {
+                auxValidsPositions[pos.row, pos.col] = true;
             }
+            pos.setPosition(position.row- 2, position.col- 1);
+            if (board.isValidPosition(pos) && canMove(pos))
+            {
+                auxValidsPositions[pos.row, pos.col] = true;
+            }
+            pos.setPosition(position.row- 2, position.col+ 1);
+            if (board.isValidPosition(pos) && canMove(pos))
+            {
+                auxValidsPositions[pos.row, pos.col] = true;
+            }
+            pos.setPosition(position.row- 1, position.col+ 2);
+            if (board.isValidPosition(pos) && canMove(pos))
+            {
+                auxValidsPositions[pos.row, pos.col] = true;
+            }
+            pos.setPosition(position.row+ 1, position.col+ 2);
+            if (board.isValidPosition(pos) && canMove(pos))
+            {
+                auxValidsPositions[pos.row, pos.col] = true;
+            }
+            pos.setPosition(position.row+ 2, position.col+ 1);
+            if (board.isValidPosition(pos) && canMove(pos))
+            {
+                auxValidsPositions[pos.row, pos.col] = true;
+            }
+            pos.setPosition(position.row+ 2, position.col- 1);
+            if (board.isValidPosition(pos) && canMove(pos))
+            {
+                auxValidsPositions[pos.row, pos.col] = true;
+            }
+            pos.setPosition(position.row+ 1, position.col- 2);
+            if (board.isValidPosition(pos) && canMove(pos))
+            {
+                auxValidsPositions[pos.row, pos.col] = true;
+            }
+
             return auxValidsPositions;
         }
 

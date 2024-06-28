@@ -11,12 +11,42 @@ namespace ProjetoXadrez.chess
         public override bool[,] generateValidsPositions()
         {
             bool[,] auxValidsPositions = new bool[board.rows, board.cols];
-            for (int row = 0; row < board.rows; row++)
-            {
-                for (int col = 0; col < board.cols; col++)
-                {
+            Position auxPos = new Position(0, 0);
 
-                }
+            auxPos.setPosition(position.row + 1, position.col+1);
+            while (board.isValidPosition(auxPos) && canMove(auxPos))
+            {
+                auxValidsPositions[auxPos.row, auxPos.col] = true;
+                if (board.Piece(auxPos) != null && board.Piece(auxPos).color != color) break;
+                auxPos.row += 1;
+                auxPos.col += 1;
+            }
+
+            auxPos.setPosition(position.row - 1, position.col+1);
+            while (board.isValidPosition(auxPos) && canMove(auxPos))
+            {
+                auxValidsPositions[auxPos.row, auxPos.col] = true;
+                if (board.Piece(auxPos) != null && board.Piece(auxPos).color != color) break;
+                auxPos.row -= 1;
+                auxPos.col += 1;
+            }
+
+            auxPos.setPosition(position.row-1, position.col - 1);
+            while (board.isValidPosition(auxPos) && canMove(auxPos))
+            {
+                auxValidsPositions[auxPos.row, auxPos.col] = true;
+                if (board.Piece(auxPos) != null && board.Piece(auxPos).color != color) break;
+                auxPos.col -= 1;
+                auxPos.row -= 1;
+            }
+
+            auxPos.setPosition(position.row+1, position.col - 1);
+            while (board.isValidPosition(auxPos) && canMove(auxPos))
+            {
+                auxValidsPositions[auxPos.row, auxPos.col] = true;
+                if (board.Piece(auxPos) != null && board.Piece(auxPos).color != color) break;
+                auxPos.col -= 1;
+                auxPos.row += 1;
             }
             return auxValidsPositions;
         }
