@@ -1,5 +1,6 @@
 ﻿using ProjetoXadrez.chess.exceptions;
 using ProjetoXadrez.chessBoard;
+using System.Runtime.ConstrainedExecution;
 
 namespace ProjetoXadrez.chess
 {
@@ -34,7 +35,27 @@ namespace ProjetoXadrez.chess
                 capturedPieces.Add(destiny);
             }
             board.addPiece(piece, end);
+
+            if(piece is King && end.col == init.col+2)
+            {
+                Position posRookKingSide = new Position(init.row, init.col + 3);
+                Position rookDestiny = new Position(init.row, init.col + 1);
+                ChessPiece Rook = board.removePiece(posRookKingSide);
+                Rook.incrementMovement();
+                board.addPiece(Rook, rookDestiny);
+            }
+
+            if (piece is King && end.col == init.col - 2)
+            {
+                Position posRookKingSide = new Position(init.row, init.col - 4);
+                Position rookDestiny = new Position(init.row, init.col - 1);
+                ChessPiece Rook = board.removePiece(posRookKingSide);
+                Rook.incrementMovement();
+                board.addPiece(Rook, rookDestiny);
+            }
+
             check = isCheck(adversary(player));
+
             if (check && isCheckMate(adversary(player)))
             {
                 isFinished = true;
@@ -108,28 +129,39 @@ namespace ProjetoXadrez.chess
 
         public void addPieces()
         {
-            ChessPiece pawn1 = new Pawn(Color.Black, board);
-            ChessPiece pawn2 = new Pawn(Color.Black, board);
-            ChessPiece pawnW = new Pawn(Color.White, board);
-            ChessPiece pawnW1 = new Pawn(Color.White, board);
-            ChessPiece kingB = new King(Color.Black, board);
-            ChessPiece kingW = new King(Color.White, board);
-            ChessPiece queen = new Queen(Color.White, board);
-            ChessPiece rookW1 = new Rook(Color.White, board);
-            ChessPiece rookW2 = new Rook(Color.White, board);
-            ChessPiece rookB = new Rook(Color.Black, board);
-            ChessPiece knight = new Knight(Color.Black, board);
-            ChessPiece bishop = new Bishop(Color.Black, board);
+            addNewPiece('a', 1, new Rook(Color.White, board));
+            addNewPiece('b', 1, new Knight(Color.White, board));
+            addNewPiece('c', 1, new Bishop(Color.White, board));
+            addNewPiece('d', 1, new Queen(Color.White, board));
+            addNewPiece('e', 1, new King(Color.White, board, this));
+            addNewPiece('f', 1, new Bishop(Color.White, board));
+            addNewPiece('g', 1, new Knight(Color.White, board));
+            addNewPiece('h', 1, new Rook(Color.White, board));
+            addNewPiece('a', 2, new Pawn(Color.White, board));
+            addNewPiece('b', 2, new Pawn(Color.White, board));
+            addNewPiece('c', 2, new Pawn(Color.White, board));
+            addNewPiece('d', 2, new Pawn(Color.White, board));
+            addNewPiece('e', 2, new Pawn(Color.White, board));
+            addNewPiece('f', 2, new Pawn(Color.White, board));
+            addNewPiece('g', 2, new Pawn(Color.White, board));
+            addNewPiece('h', 2, new Pawn(Color.White, board));
 
-            //board.addPiece(queen, ConvertPosition('a', 1));
-            addNewPiece('a', 7, kingB);
-            addNewPiece('h', 1, kingW);
-            addNewPiece('d', 4, knight);
-            addNewPiece('b', 2, rookW1);
-            addNewPiece('b', 8, pawn1);
-            addNewPiece('c', 3, rookW2);
-            //board.addPiece(king, ConvertPosition('c', 1));
-            //board.addPiece(bishop, ConvertPosition('d', 1));
+            addNewPiece('a', 8, new Rook(Color.Black, board));
+            addNewPiece('b', 8, new Knight(Color.Black, board));
+            addNewPiece('c', 8, new Bishop(Color.Black, board));
+            addNewPiece('d', 8, new Queen(Color.Black, board));
+            addNewPiece('e', 8, new King(Color.Black, board, this));
+            addNewPiece('f', 8, new Bishop(Color.Black, board));
+            addNewPiece('g', 8, new Knight(Color.Black, board));
+            addNewPiece('h', 8, new Rook(Color.Black, board));
+            addNewPiece('a', 7, new Pawn(Color.Black, board));
+            addNewPiece('b', 7, new Pawn(Color.Black, board));
+            addNewPiece('c', 7, new Pawn(Color.Black, board));
+            addNewPiece('d', 7, new Pawn(Color.Black, board));
+            addNewPiece('e', 7, new Pawn(Color.Black, board));
+            addNewPiece('f', 7, new Pawn(Color.Black, board));
+            addNewPiece('g', 7, new Pawn(Color.Black, board));
+            addNewPiece('h', 7, new Pawn(Color.Black, board));
         }
 
         public bool isCheck(Color color)
